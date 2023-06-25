@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='register_page.css')}}">
+</head>
+<body>
+<script>
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match. Please re-enter.");
+            return false;
+        }
+    }
+</script>
+    <header>
+        <div class="logo">Dine Delights</div>
+ 
+        <nav class="nav-bar">
+        <ul>
+            <li>
+                <a href="{{url_for('main.index') }}">Home</a>
+            </li>
+            <li>
+                <a href="{{url_for('auth.signup')}}" class="active">Sign Up</a>
+            </li>
+            <li>
+                <a href="{{url_for('auth.login')}}">Log In</a>
+            </li>
+        </ul>
+        </nav>
+    </header>
+
+    <div class="maincontainer">
+        <div class="container">
+            <div class="title">Registration</div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <form method="POST" action="/signup" onsubmit="return validateForm()">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input type="text" name="name" placeholder="Enter your name" required pattern="[A-Za-z ]+" title="Please enter only letters and spaces">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Username</span>
+                        <input type="text" name="username" placeholder="Enter your username" required pattern="[A-Za-z0-9_]+">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="email" name="email" placeholder="Enter your email" required pattern=".*" title="Please enter your email address according to this example : 123@abc.com">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="text" name="phonenumber" placeholder="Enter your number" required pattern="[0-9]{9,}" title="Please enter more than 9 digits">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <input type="password" name="password" id="password" placeholder="Enter your password" required pattern="^.{3,}$" title="Please enetr more than 3 characters">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Confirm Password</span>
+                        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" required>
+                    </div>
+                </div>
+                <div class="gender-details">
+                    <input type="radio" name="gender" id="dot-1" value="male" required>
+                    <input type="radio" name="gender" id="dot-2" value="female" required>
+                    <input type="radio" name="gender" id="dot-3" value="none" required>
+                    <span class="gender-title">Gender</span>
+                    <div class="category">
+                        <label for="dot-1">
+                            <span class="dot one"></span>
+                            <span class="gender">Male</span>
+                        </label>
+                        <label for="dot-2">
+                            <span class="dot two"></span>
+                            <span class="gender">Female</span>
+                        </label>
+                        <label for="dot-3">
+                            <span class="dot three"></span>
+                            <span class="gender">Prefer not to say</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

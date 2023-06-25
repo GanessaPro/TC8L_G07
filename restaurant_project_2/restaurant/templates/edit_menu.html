@@ -1,0 +1,88 @@
+{# templates/edit_menu.html #}
+
+{% extends "base.html" %}
+
+{% block content %}
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Edit menu</h1>
+            
+          </div>
+        </div>
+
+        
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Menu details</h3>
+              <!-- <i class="bx bx-search"></i>
+              <i class="bx bx-filter"></i> -->
+            </div>
+            <form  method="POST" action="/edit_menu/{{menu.id}}" enctype="multipart/form-data">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p>Menu name :</p>
+                  </td>
+                  <td><input type="text" id="menuname" name="menuname" value="{{menu.menuname}}"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Price per quantity (RM):</p>
+                  </td>
+                  <td><input type="text" id="price" name="price"  value="{{menu.priceperunit}}"></td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <p>Menu type :</p>
+                  </td>
+                  <td>
+                    <select id="menu_type" name="menu_type">
+                      <option value="Malay cuisine" {% if menu.menutype == 'Malay cuisine' %}selected{% endif %}>Malay cuisine</option>
+                      <option value="Chinese cuisine" {% if menu.menutype == 'Chinese cuisine' %}selected{% endif %}>Chinese cuisine</option>
+                      <option value="Indian cuisine" {% if menu.menutype == 'Indian cuisine' %}selected{% endif %}>Indian cuisine</option>
+                      <option value="others" {% if menu.menutype == 'others' %}selected{% endif %}>Others</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Food Description :</p>
+                  </td>
+                  <td>
+                    <textarea id="menu_desc" name="menu_desc" required pattern="[A-Za-z ]+" title="Please enter only letters and spaces" >{{menu.fooddescription}}</textarea>
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                      <p>Menu image :</p>
+                    </td>
+                    <td>
+                      <div>
+                        {% if menu.imagelocation %}
+                          <img height="500px" src="{{ url_for('static', filename='/images/menu_img/' + menu.imagelocation) }}" alt="Menu Image">
+                          <h5>{{ menu.imagelocation }}</h5>
+                        {% endif %} 
+                      </div>
+                      <label for="avatar">Replace another picture:</label><br>
+                      <input type="file" id="img" name="img" accept="image/*"  value="{{menu.imagelocation}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit">Change</button></td>
+                </tr>
+              </tbody>
+            </table>
+            </form>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+{% endblock content %}    

@@ -1,0 +1,35 @@
+{# templates/mymenu.html #}
+
+{% extends "base.html" %}
+
+{% block content %}
+<!-- MAIN -->
+<main>
+    <div class="head-title">
+      <div class="left">
+        <h1>My Menu</h1>
+      </div>
+    </div>
+    
+    <div class="table-data">
+      <div class="todo">
+        <div class="head">
+          <h3>Menus</h3>
+          <a href="{{ url_for('admin.add_menu') }}"><i class="fa-solid fa-plus fa-lg"></i></i></a>
+        </div>
+        <ul class="todo-list">
+          {% for item in menus %}
+          <li class="completed">
+            <p>{{ item.menuname }}</p>
+            <div>
+              <a href="{{ url_for('admin.edit_menu',menu_id = item.id) }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+              <a href="{{ url_for('admin.delete_menu',menu_id = item.id) }}"><i class="fa-solid fa-trash fa-lg"></i></a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </main>
+  <!-- MAIN -->
+{% endblock content %}

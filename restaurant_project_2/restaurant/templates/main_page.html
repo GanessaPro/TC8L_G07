@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To Dine Delights</title>
+    <link rel="stylesheet"  href="{{url_for('static', filename='main_page.css')}}">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">Dine Delights</div>
+ 
+        <nav class="nav-bar">
+        <ul>
+            <li>
+                <a href="{{url_for('main.index')}}" class="active">Home</a>
+            </li>
+            <li>
+                <a href="{{url_for('auth.signup')}}">Sign Up</a>
+            </li>
+            <li>
+                <a href="{{url_for('auth.login')}}">Log In</a>
+            </li>
+        </ul>
+        </nav>
+    </header>
+</body>
+<main>
+    <section id="hero">
+    
+        <h1>Welcome <br>to<br></h1>
+        <h1>DINE DELIGHTS</h1>
+
+
+</main>
+</html>
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='add_to_cart.css')}}" />
+
+    <title>Hello {{ session['username'] }} !</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+      <a href="{{url_for('customer.main_page_customer')}}" class="brand">
+        <i class="bx bxs-smile"></i>
+        <span class="text">Dine Delights</span>
+      </a>
+      <ul class="side-menu top">
+        <li>
+          <a href="{{url_for('customer.main_page_customer')}}">
+            <i class="bx bxs-dashboard"></i>  
+            <span class="text">Buy Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{url_for('customer.add_to_cart')}}">
+            <i class="bx bxs-shopping-bag-alt" ></i><span class="text">Cart</span>            
+          </a>
+        </li>
+        <li>
+          <a href="{{url_for('customer.customer_notifications')}}">
+            <i class="bx bxs-doughnut-chart"></i>
+            <span class="text">Purchases</span>
+          </a>
+        </li>
+
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="{{url_for('customer.customer_settings')}}">
+            <i class="bx bxs-cog"></i>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('auth.logout') }}" class="logout">
+            <i class="bx bxs-log-out-circle"></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- NAVBAR -->
+      <nav>
+        <i class="bx bx-menu"></i>
+        <form action="#">
+          <div class="form-input">
+            
+            </button>
+          </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden />
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="{{url_for('customer.customer_settings')}}" class="profile">
+          <h3>Hello {{ session['username'] }} !</h3>
+        </a>
+      </nav>
+      <!-- NAVBAR -->
+
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="container list">
+            <div class="cart">
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div>
+                    {{ messages[0] }}
+                </div>
+              {% endif %}
+              {% endwith %}
+              <form action="/add_to_cart" method="POST">
+                <div class="products">
+                    {% if menus %}
+                      {% for order, menu in menus %}
+                        <div class="product">
+                          <img src="{{ url_for('static', filename='images/menu_img/' + menu.imagelocation) }}">
+                          <div class="product-info">
+                            <h3 class="menu-name">{{menu.menuname}}</h3>
+                            <h4 class="menu-price">Per quantity : RM {{ "{:.2f}".format(menu.priceperunit) }}</h4>
+                            <h4 class="menu-type">{{menu.menutype}}</h4>
+                              <p class="product-quantity">Qnt: <input required pattern="[0-9]{1,3}" title="Please enter only positive integers & maximum is 999" value="{{order.quantity}}" name="{{order.id}}"></p>
+                              <p class="product-remove">
+                                <a href="{{ url_for('customer.delete_order',order_id = order.id) }}">
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
+                                  <span class="remove">Remove</span>
+                                </a>
+                              </p>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="cart-total">
+                  <p>
+                    <span>Total Price</span>
+                    <span>RM {{"{:.2f}".format(totalprice)}}</span>
+                  </p>
+                  <p>
+                    <span>Number of Items</span>
+                    <span>{{quantity}}</span>
+                  </p>
+                  <p>
+                    <span>Transaction ID</span>
+                    <span>{{current_trx_id}}</span>
+                  </p>
+                  <div class="cart-buttons">
+                    <input type="submit" value="Calculate">  
+                    
+                    <a href="{{ url_for('customer.main_page_customer') }}">Continue purchase</a>                  
+                    
+                    <a href="{{ url_for('customer.confirm_order', current_trx_id=current_trx_id) }}">Confirm</a>
+
+
+
+                  </div>                    
+                </div>
+              </form>
+            </div>
+          </div>         
+        </div>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+
+    <!-- footer -->
+    <div class="footer">
+      <p>Made by <a href="#">TL8L Group 7</a> <span id="date"></span></p>
+    </div>
+    <!-- End of footer -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

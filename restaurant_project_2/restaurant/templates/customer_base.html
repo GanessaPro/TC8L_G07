@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/be2e1f99e9.js" crossorigin="anonymous"></script>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_page_customer.css') }}" />
+
+    <title>Hello {{ session['username'] }} !</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+  </head>
+  <body>
+    
+    {% include "customer_sidebar.html" %}
+    <!-- CONTENT -->
+    <section id="content">
+        {% include "_navigation.html" %}
+        <!-- MAIN the pages that we have breaked down into parts -->
+        {% block content %}
+        <h1>Welcome to {{ title }}!</h1> 
+        {% endblock content %}  
+        <!-- MAIN -->
+    </section> 
+    <!-- CONTENT -->
+
+    <!-- footer -->
+    <div class="footer">
+      <p>Made by <a href="#">TL8L Group 7</a> <span id="date"></span></p>
+    </div>
+    <!-- End of footer -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+{# templates/settings.html #}
+
+{% extends "base.html" %}
+
+{% block content %}
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Settings</h1>
+            
+          </div>
+        </div>
+
+        
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Change username and password</h3>
+              <!-- <i class="bx bx-search"></i>
+              <i class="bx bx-filter"></i> -->
+            </div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div>
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <form action="/admin/change_credentials/{{currentuserid}}" method="POST">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p>Username :</p>
+                  </td>
+                  <td><input type="text" id="username" name="username" value = "{{currentusername}}" placeholder="Enter your new username"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Password :</p>
+                  </td>
+                  <td><input type="password" id="password" name="password" placeholder="Enter your new password" required pattern="^.{3,}$" title="Please enter more than 3 characters"></td>
+                </tr>
+                
+                <tr>
+                    <td>
+                    </td>
+                    <td><button type="submit">Change</button></td>
+                  </tr>
+              </tbody>
+            </table>
+            </form>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+
+{% endblock content %}

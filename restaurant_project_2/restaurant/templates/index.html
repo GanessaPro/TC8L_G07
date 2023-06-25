@@ -1,0 +1,44 @@
+{# templates/index.html #}
+
+{% extends "base.html" %}
+
+{% block title %}
+{{ session['username'] }}
+{% endblock title %}
+
+{% block content %}
+<!-- MAIN -->
+<main>        
+  <div class="head-title">
+    <div class="left">
+      <h1>Dashboard</h1>
+    </div>
+  </div>
+
+  <ul class="box-info">
+    <li>
+      <i class="bx bxs-calendar-check"></i>
+      <span class="text">
+        <h3>{{ total_orders }}</h3>
+        <p>Total Orders</p>
+      </span>
+      </li>
+    <li>
+      <i class="bx bxs-group"></i>
+      <span class="text">
+        <h3>{{ total_customers }}</h3>
+        <p>Customers</p>
+      </span>
+    </li>
+    <li>
+        <i class="bx bxs-dollar-circle"></i>
+       <span class="text">
+          <h3>RM {{ "{:.2f}".format(total_sales)}} </h3>
+        <p>Total Sales</p>
+        </span>
+    </li>
+  </ul>
+</section>
+    <!-- CONTENT -->
+{% endblock content %}
+

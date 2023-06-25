@@ -1,0 +1,45 @@
+{# templates/_sidebar.html #}
+
+<section id="sidebar" class="hide">
+    <a href="{{ url_for('admin.dashboard') }}" class="brand">
+      <i class="bx bxs-smile"></i>
+      <span class="text">Dine Delights</span>
+    </a>
+    <ul class="side-menu top">
+      <li>
+        <a href="{{ url_for('admin.dashboard') }}">
+          <i class="bx bxs-dashboard"></i>  
+          <span class="text">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('admin.mymenu') }}">
+          <i class="bx bxs-shopping-bag-alt" ></i><span class="text">My Menu</span>            
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('admin.trackorders') }}">
+          <i class="bx bxs-doughnut-chart"></i>
+          <span class="text">Track Orders</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="side-menu">
+    
+      <li>
+        <a href="{{ url_for('admin.admin_settings') }}">
+          <i class="bx bxs-cog"></i>
+          <span class="text">Settings</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('auth.logout') }}" class="logout">
+          <i class="bx bxs-log-out-circle"></i>
+          <span class="text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+  
+
+<!-- SIDEBAR -->

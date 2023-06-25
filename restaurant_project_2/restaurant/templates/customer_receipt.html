@@ -1,0 +1,70 @@
+{# templates/customer_receipt.html #}
+
+{% extends "customer_base.html" %}
+
+{% block content %}
+
+      <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Order confirmation</h1>
+            
+          </div>
+        </div>
+
+        
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Please fill up your details to download your receipt</h3>
+              <!-- <i class="bx bx-search"></i>
+              <i class="bx bx-filter"></i> -->
+            </div>
+            <form action="{{ url_for('customer.process_order') }}" method="POST">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <p>Transaction ID :</p>
+                  </td>
+                  <td>
+                    <p>{{confirm_trx_id}}</p>
+                    <input type="hidden" name="confirm_trx_id" value="{{ confirm_trx_id }}">
+                  </td>
+                </tr>
+                <tr>
+                <tr>
+                  <td>
+                    <p>Delivery Address :</p>
+                  </td>
+                  <td><textarea id="delivery_address" name="delivery_address"  placeholder="Enter your delivery address" required></textarea></td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Payment Method :</p>
+                  </td>
+                  <td>
+                    <select id="payment" name="payment">
+                    <option value="Online Banking">Online Banking </option>
+                    <option value="Cash On Delivery">Cash On Delivery</option>
+                    </select>
+                  </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                    </td>
+                    <td><button type="submit">Confirm order</button></td>
+                </tr>
+                
+              </tbody>
+            </table>
+            </form>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+{% endblock content %}

@@ -1,0 +1,78 @@
+{# templates/customer_notifications.html #}
+
+{% extends "customer_base.html" %}
+
+{% block content %}
+       <!-- MAIN -->
+       <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Purchases</h1>
+
+          </div>
+ 
+        </div>
+
+        <!-- <ul class="box-info">
+          <li>
+            <i class="bx bxs-calendar-check"></i>
+            <span class="text">
+              <h3>1020</h3>
+              <p>New Order</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-group"></i>
+            <span class="text">
+              <h3>2834</h3>
+              <p>Visitors</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="text">
+              <h3>RM250,043</h3>
+              <p>Total Sales</p>
+            </span>
+          </li>
+        </ul> -->
+
+        <div class="table-data">
+          <div class="order">
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Payment Method</th>
+                  <th>Ordered Date</th>
+                  <!-- <th>Status</th> -->
+                  <th>Receipt</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for items in history %}
+                    <tr>
+                      <td>
+                        <p>{{items.id}}</p>
+                      </td>
+                      <td>{{items.payment_method}}</td>
+                      <td>{{items.order_date}}</td>
+                      <!-- <td><span class="status completed">Completed</span></td> -->
+                      <td><a href="{{url_for('customer.customer_view_receipt', trx_id = items.id ) }}" ><Button class="button-1" role="button">View</Button></a></td>
+                    </tr>
+                {% endfor %}
+
+
+                
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+{% endblock content %}

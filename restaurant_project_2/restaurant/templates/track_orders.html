@@ -1,0 +1,79 @@
+{# templates/track_orders.html #}
+
+{% extends "base.html" %}
+
+{% block content %}
+      <!-- MAIN -->
+
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Track Orders</h1>
+          </div>
+        </div>
+        <div class="head-title">
+          <div class="form-input">
+            <input type="search" id="adminfilterInput" placeholder="Search customer name..." />
+            <button  onclick="filterNames()" class="search-btn">
+              <i class="bx bx-search"></i>
+            </button>
+        </div>
+      </div>
+
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Recent Orders</h3>
+
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Customer name</th>
+                  <th>Ordered Date</th>
+
+                  <th>Receipt</th>
+                  
+                </tr>
+              </thead>
+              <tbody id="names">
+              
+                {% for items in orders %} 
+                  <tr class="transactions">
+                    <td>
+                      <p>{{items.id}}</p>
+                    </td>
+                    <td class="customer_name">{{items.users.fullname}}</td>
+                    <td>{{items.order_date}}</td>
+                    <td><a href="{{url_for('customer.customer_view_receipt', trx_id = items.id ) }}" ><Button class="button-1" role="button">View</Button></a></td>
+                  </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <script>
+      function filterNames() {
+      var filterValue = document.getElementById('adminfilterInput').value.toUpperCase();
+      var names = document.getElementById('names');
+      alltd = names.querySelectorAll('td.customer_name');
+      transactions = names.querySelectorAll('tr.transactions');
+ 
+      for (var i = 0; i < alltd.length; i++) {
+        var customerName = alltd[i].innerText.toUpperCase();
+
+        if (customerName.indexOf(filterValue) > -1) {
+          transactions[i].style.display = '';
+        } else {
+          transactions[i].style.display = 'none';
+        }
+      }
+    }
+    </script>
+    <!-- CONTENT -->
+{% endblock content %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='login_page.css')}}">
+  
+</head>
+<body>
+  <header>
+    <div class="logo">Dine Delights</div>
+    <nav class="nav-bar">
+    <ul>
+        <li>
+            <a href="{{ url_for('main.index') }}" >Home</a>
+        </li>
+        <li>
+            <a href="{{ url_for('auth.signup')}}">Sign Up</a>
+        </li>
+        <li>
+            <a href="{{ url_for('auth.login')}}"  class="active">Login</a>
+        </li>
+    </ul>
+    </nav>
+  </header>
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="notification is-danger">
+          {{ messages[0] }}.
+        </div>
+      {% endif %}
+  {% endwith %}
+  <div class="box">
+    
+    <span class="borderLine"></span>
+    <form method="POST" action="/login">
+      <h2>Login</h2>
+      <div class="inputBox">
+        <input type="text" name="username" required="required">
+        <span>Username</span>
+        <i></i>
+      </div>
+      <div class="inputBox">
+        <input type="password" name="password" required="required">
+        <span>Password</span>
+        <i></i>
+      </div>
+      <div class="links">
+        <a href="#"></a>
+        <a href="{{ url_for('auth.signup')}}">Haven't Registered Account </a>
+      </div>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+</div>
+</body>
+</html>
