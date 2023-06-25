@@ -1,10 +1,8 @@
 import os
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash, current_app
 from werkzeug.security import generate_password_hash
-from flask_login import current_user
 from .models import Menu,User,Transactions,Orders
 from . import db
-from PIL import Image
 from werkzeug.utils import secure_filename
 
 admin = Blueprint('admin', __name__)
@@ -175,13 +173,3 @@ def trackorders():
     .all()
     print(f"Confirmed transactions by customers :{confirmed_transactions}")
     return render_template("track_orders.html", orders = confirmed_transactions)
-
-
-       
-
-
-
-# @main.route('/profile')
-# @login_required
-# def profile():
-#     return render_template('profile.html', name=current_user.name)
